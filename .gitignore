@@ -1,0 +1,23 @@
+# Entorno
+.env
+*.local
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+# Node
+node_modules/
+.next/
+out/
+# Hardware
+.pio/
+.vscode/.browse.c_cpp.db*
+# Backups y datos locales
+database/backups/*.sql
+database/backups/*.dump
+# SO / IDE
+.DS_Store
+.idea/
+.vscode/

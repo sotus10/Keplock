@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+pydantic-settings
+python-jose[cryptography]
+bcrypt
+apscheduler
+pytest
+httpx
