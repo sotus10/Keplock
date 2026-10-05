@@ -1,6 +1,8 @@
 services:
+  # Solo si quieren una base local; con Supabase no hace falta
   db:
     image: postgres:16
+    profiles: ["local-db"]
     env_file: .env
     ports:
       - "5432:5432"
@@ -11,14 +13,24 @@ services:
   backend:
     build: ./backend
     env_file: .env
-    depends_on:
-      - db
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      - ./backend:/app          # cambios en vivo
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-  # frontend: se agrega cuando exista frontend/Dockerfile (HU-FE-01)
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost:8000
+  #     - WATCHPACK_POLLING=true  # ayuda al hot-reload en Windows
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules       # evita que tu carpeta pise los módulos del contenedor
+  #   depends_on:
+  #     - backend
 
 volumes:
   pgdata:
